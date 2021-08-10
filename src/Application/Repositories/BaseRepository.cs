@@ -9,11 +9,11 @@ namespace Application.Repositories
 {
     public interface IBaseRepository<T> where T : class
     {
-        Task<ICollection<T>> GetAll();
-        Task<T> GetById(int id);
-        Task<int> Add(T entity);
-        Task<int> Update(T entity);
-        Task<int> Remove(T entity);
+        Task<ICollection<T>> GetAllAsync();
+        Task<T> GetByIdAsync(int id);
+        Task<int> AddAsync(T entity);
+        Task<int> UpdateAsync(T entity);
+        Task<int> RemoveAsync(T entity);
     }
 
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
@@ -36,30 +36,30 @@ namespace Application.Repositories
             }
         }
 
-        public async virtual Task<int> Add(T entity)
+        public async virtual Task<int> AddAsync(T entity)
         {
             entity.CreatedAt = DateTime.Now;
             DbTable.Add(entity);
             return await _context.SaveChangesAsync();
         }
 
-        public async virtual Task<ICollection<T>> GetAll()
+        public async virtual Task<ICollection<T>> GetAllAsync()
         {
             return await DbTable.ToListAsync();
         }
 
-        public async virtual Task<T> GetById(int id)
+        public async virtual Task<T> GetByIdAsync(int id)
         {
             return await DbTable.FindAsync(id);
         }
 
-        public async virtual Task<int> Remove(T entity)
+        public async virtual Task<int> RemoveAsync(T entity)
         {
             DbTable.Remove(entity);
             return await _context.SaveChangesAsync();
         }
 
-        public async virtual Task<int> Update(T entity)
+        public async virtual Task<int> UpdateAsync(T entity)
         {
             entity.ModifiedAt = DateTime.Now;
             _context.Entry(entity).State = EntityState.Modified;

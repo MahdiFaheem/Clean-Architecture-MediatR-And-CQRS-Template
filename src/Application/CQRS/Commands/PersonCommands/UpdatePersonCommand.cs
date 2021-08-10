@@ -23,7 +23,7 @@ namespace Application.CQRS.Commands.PersonCommands
 
             public async Task<int?> Handle(UpdatePersonCommand request, CancellationToken cancellationToken)
             {
-                var person = await _repo.GetById(request.Id);
+                var person = await _repo.GetByIdAsync(request.Id);
 
                 if (person == null)
                 {
@@ -32,7 +32,7 @@ namespace Application.CQRS.Commands.PersonCommands
 
                 person = _mapper.Map(request, person);
 
-                return await _repo.Update(person);
+                return await _repo.UpdateAsync(person);
             }
         }
     }

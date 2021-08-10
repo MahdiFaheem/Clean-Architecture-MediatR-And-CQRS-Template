@@ -21,14 +21,14 @@ namespace Application.CQRS.Commands.PersonCommands
             }
             public async Task<int?> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
             {
-                var result = await _repo.GetById(request.Id);
+                var result = await _repo.GetByIdAsync(request.Id);
 
                 if (result == null)
                 {
                     return null;
                 }
 
-                return await _repo.Remove(result);
+                return await _repo.RemoveAsync(result);
             }
         }
     }

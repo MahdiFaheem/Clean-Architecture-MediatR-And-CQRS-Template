@@ -24,7 +24,7 @@ namespace Application.CQRS.Commands.PersonCommands
             public async Task<Person> Handle(CreatePersonCommand request, CancellationToken cancellationToken)
             {
                 var person = _mapper.Map<Person>(request);
-                await _repo.Add(person);
+                await _repo.AddAsync(person);
 
                 return person;
             }

@@ -23,7 +23,7 @@ namespace Application.CQRS.Queries.PersonQueries
 
             public async Task<Person> Handle(GetPersonByIdQuery request, CancellationToken cancellationToken)
             {
-                return _mapper.Map<Person>(await _repo.GetById(request.Id));
+                return await _repo.GetByIdAsync(request.Id);
             }
         }
     }

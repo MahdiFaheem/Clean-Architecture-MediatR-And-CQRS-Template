@@ -11,7 +11,7 @@ namespace API.Controllers
     public class PersonsController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List<PersonDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<PersonDTO>>> Get()
         {
             return Ok(await Mediator.Send(new GetPersonsQuery()));
         }
