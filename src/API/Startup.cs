@@ -30,7 +30,7 @@ namespace API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Complaint Management System", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Clean Architecture MediatR And CQRS Template", Version = "v1" });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -67,7 +67,7 @@ namespace API
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Complaint Management System v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Clean Architecture MediatR And CQRS Template v1"));
 
             app.ConfigureExceptionHandler();
 
