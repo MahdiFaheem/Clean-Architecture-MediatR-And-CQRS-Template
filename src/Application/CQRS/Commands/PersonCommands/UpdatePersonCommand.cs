@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace Application.CQRS.Commands.PersonCommands
 {
-    public class UpdatePersonCommand : PersonDTO, IRequest<int?>
+    public class UpdatePersonCommand : IRequest<int?>
     {
         public int Id { get; set; }
+        public PersonDTO Dto { get; }
+
+        public UpdatePersonCommand(PersonDTO dto)
+        {
+            Dto = dto;
+        }
+
         public class UpdatePersonCommandHandler : IRequestHandler<UpdatePersonCommand, int?>
         {
             private readonly IPersonRepository _repo;
@@ -30,7 +37,7 @@ namespace Application.CQRS.Commands.PersonCommands
                     return null;
                 }
 
-                person = _mapper.Map(request, person);
+                person = _mapper.Map(request.Dto, person);
 
                 return await _repo.UpdateAsync(person);
             }

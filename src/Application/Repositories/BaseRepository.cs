@@ -28,13 +28,7 @@ namespace Application.Repositories
         /// <summary>
         /// Gets the DbSet of entity by setting it to context.
         /// </summary>
-        protected DbSet<T> DbTable
-        {
-            get
-            {
-                return _context.Set<T>();
-            }
-        }
+        protected DbSet<T> DbTable => _context.Set<T>();
 
         public async virtual Task<int> AddAsync(T entity)
         {

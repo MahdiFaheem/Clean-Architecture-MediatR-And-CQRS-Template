@@ -26,7 +26,7 @@ namespace API
             services.AddInfrastructure(Configuration);
             services.AddApplication();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddSwaggerGen(c =>
             {

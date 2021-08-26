@@ -1,5 +1,4 @@
 ﻿using Application.Repositories;
-using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using System.Collections.Generic;
@@ -13,12 +12,10 @@ namespace Application.CQRS.Queries.PersonQueries
         public class GetPersonsQueryHandler : IRequestHandler<GetPersonsQuery, ICollection<Person>>
         {
             private readonly IPersonRepository _repo;
-            private readonly IMapper _mapper;
 
-            public GetPersonsQueryHandler(IPersonRepository repo, IMapper mapper)
+            public GetPersonsQueryHandler(IPersonRepository repo)
             {
                 _repo = repo;
-                _mapper = mapper;
             }
 
             public async Task<ICollection<Person>> Handle(GetPersonsQuery request, CancellationToken cancellationToken)

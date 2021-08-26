@@ -8,8 +8,15 @@ using System.Threading.Tasks;
 
 namespace Application.CQRS.Commands.PersonCommands
 {
-    public class CreatePersonCommand : PersonDTO, IRequest<Person>
+    public class CreatePersonCommand : IRequest<Person>
     {
+        public PersonDTO Dto { get; }
+
+        public CreatePersonCommand(PersonDTO dto)
+        {
+            Dto = dto;
+        }
+
         private class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand, Person>
         {
             private readonly IPersonRepository _repo;
@@ -23,7 +30,7 @@ namespace Application.CQRS.Commands.PersonCommands
 
             public async Task<Person> Handle(CreatePersonCommand request, CancellationToken cancellationToken)
             {
-                var person = _mapper.Map<Person>(request);
+                var person = _mapper.Map<Person>(request.Dto);
                 await _repo.AddAsync(person);
 
                 return person;

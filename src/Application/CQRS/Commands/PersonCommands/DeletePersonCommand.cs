@@ -9,6 +9,7 @@ namespace Application.CQRS.Commands.PersonCommands
     public class DeletePersonCommand : IRequest<int?>
     {
         public int Id { get; set; }
+
         public class DeletePersonCommandHandler : IRequestHandler<DeletePersonCommand, int?>
         {
             private readonly IPersonRepository _repo;

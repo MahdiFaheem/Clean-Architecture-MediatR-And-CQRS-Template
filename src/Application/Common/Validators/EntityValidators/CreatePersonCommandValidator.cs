@@ -8,13 +8,13 @@ namespace Application.Common.Validators.EntityValidators
     {
         public CreatePersonCommandValidator()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.Dto.Name)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                 .Matches("^[a-zA-Z]*$").WithMessage("{PropertyName} can only contain alphabets")
                 .MaximumLength(25);
 
-            RuleFor(x => x.DateOfBirth)
+            RuleFor(x => x.Dto.DateOfBirth)
                 .Must(BeAValidAge).WithMessage("{PropertyName} is invalid");
         }
 
